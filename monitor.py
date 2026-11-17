@@ -28,6 +28,10 @@ THRESHOLDS = {
     "disk": 90,
 }
 
+# How many seconds the live monitor waits between refreshes
+# TODO: Set this to 2 seconds.
+REFRESH_SECONDS = 2
+
 
 # -------------------------------------------------------------------
 # Part 4: System information
@@ -300,3 +304,74 @@ def display_warnings(summary):
         # TODO: Loop through each warning in the list and print it.
         for warning in warnings:
             print(warning)
+
+
+# -------------------------------------------------------------------
+# Part 8: Live monitor
+# -------------------------------------------------------------------
+
+def clear_screen():
+    """
+    Clear the terminal window.
+    """
+
+    # os.name is "nt" on Windows
+    # TODO: Fill in the value of os.name on Windows,
+    #       and the Windows clear-screen command.
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+
+def display_live_screen(summary):
+    """
+    Print one "frame" of the live monitor.
+    """
+
+    # TODO: Get the statuses dictionary for this summary.
+    statuses = get_statuses(summary)
+
+    print("=" * 30)
+    print("   TB System Resource Monitor")
+    print("=" * 30)
+    print()
+    print(f"CPU Usage:      {summary['cpu_percent']}%")
+    print(f"Memory Usage:   {summary['memory_percent']}%")
+
+    # TODO: Print the disk percent from the summary.
+    print(f"Disk Usage:     {summary['disk_percent']}%")
+    print()
+    print("Status:")
+    print(f"CPU:    {statuses['cpu']}")
+
+    # TODO: Print the memory and disk statuses.
+    print(f"Memory: {statuses['memory']}")
+    print(f"Disk:   {statuses['disk']}")
+    print()
+    print("Press Ctrl+C to stop monitoring.")
+
+
+def start_live_monitor():
+    """
+    Keep refreshing the screen until the user presses Ctrl+C.
+    """
+
+    try:
+        # TODO: Start a loop that runs forever.
+        while True:
+            # TODO: Gather a fresh resource summary.
+            summary = get_resource_summary()
+
+            clear_screen()
+
+            # TODO: Display this summary on the screen.
+            display_live_screen(summary)
+
+            # TODO: Wait REFRESH_SECONDS seconds before the next refresh.
+            time.sleep(REFRESH_SECONDS)
+
+    # TODO: Catch the exception raised when the user presses Ctrl+C.
+    except KeyboardInterrupt:
+        print()
+        print("Live monitor stopped. Returning to the menu...")
