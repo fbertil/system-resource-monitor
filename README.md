@@ -2,16 +2,16 @@
 
 ## What the application does
 
-This is a Python command-line application that shows CPU, memory, and disk usage. It can refresh measurements in a live terminal display, warn when resource usage exceeds a limit, and list the processes using the most memory.
+Python command-line app that shows CPU, memory, and disk usage. 
 
 ## Features
 
 - View current CPU, memory, and main-disk usage.
 - Display used and total memory and disk space in GB.
 - Warn when CPU or memory usage exceeds 80%, or disk usage exceeds 90%.
-- Refresh a live display until Ctrl+C is pressed.
-- Show the five processes using the most memory.
-- View operating system, hostname, processor, and Python version.
+- Refresh a live display.
+- Show five processes using the most memory.
+
 
 ## Technologies
 
@@ -37,8 +37,6 @@ system-resource-monitor/
 ```
 
 ## Installation
-
-Install Python 3 and Git, then clone the repository and install its dependency:
 
 ```bash
 git clone https://github.com/fbertil/system-resource-monitor.git
